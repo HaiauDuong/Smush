@@ -10,7 +10,11 @@ export const UserHome = props => {
 
   return (
     <div>
-      <h3>Welcome, {email}</h3>
+      <h4>Welcome, {email}</h4>
+      {/* <form onSubmit={put request}>
+            <input className='weatherForm' type="text" name="city" placeholder="City..." />
+            <button className='weatherForm'> Submit </button>
+          </form> */}
     </div>
   )
 }

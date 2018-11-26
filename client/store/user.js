@@ -6,6 +6,7 @@ import history from '../history'
  */
 const GET_USER = 'GET_USER'
 const REMOVE_USER = 'REMOVE_USER'
+const ADD_CITY = 'ADD_CITY'
 
 /**
  * INITIAL STATE
@@ -17,10 +18,23 @@ const defaultUser = {}
  */
 const getUser = user => ({type: GET_USER, user})
 const removeUser = () => ({type: REMOVE_USER})
+const makeCity = user => ({type: ADD_CITY, user})
 
 /**
  * THUNK CREATORS
  */
+
+export const addCity = (id, city) => async dispatch => {
+  try {
+    const {data} = await axios.put(`/api/user/${id}`, {city})
+    dispatch(makeCity(data))
+  }
+  catch(err){
+    console.error(err)
+  }
+}
+
+
 export const me = () => async dispatch => {
   try {
     const res = await axios.get('/auth/me')
@@ -65,6 +79,8 @@ export default function(state = defaultUser, action) {
       return action.user
     case REMOVE_USER:
       return defaultUser
+    // case ADD_CITY:
+    //   return action.user
     default:
       return state
   }
